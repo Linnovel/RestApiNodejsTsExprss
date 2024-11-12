@@ -1,4 +1,5 @@
 import {Router} from 'express'
+import { createProduct } from '../handlers/product'
 
 
 //Routing
@@ -10,9 +11,7 @@ router.get("/",(req, res) => {
 })
 
 //POST
-router.post("/",(req, res) => {
-    res.json('DESDE POST')
-})
+router.post("/", createProduct)
 
 //PUST
 router.put("/",(req, res) => {

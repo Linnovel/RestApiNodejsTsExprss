@@ -14,13 +14,14 @@ async function connectDB(){
         console.log('hubo un error al conectar la BD')
     }
 }
-
-
-
 connectDB()
+
 
 //servidor de express
 const server = express();
+
+//Leer datos del formulario
+server.use(express.json())
 
 //routing
 server.use("/api/products", router)
