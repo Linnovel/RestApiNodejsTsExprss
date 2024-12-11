@@ -16,7 +16,6 @@ async function connectDB(){
 }
 connectDB()
 
-
 //servidor de express
 const server = express();
 

@@ -43,40 +43,50 @@ export const getProducstsById =  async (req: Request, res: Response): Promise<vo
 
 //Update product
 
-export const updateProduct = async (req: Request, res: Response): Promise<void> => {
+export const updateProduct = async (req: Request, res: Response):Promise<void> => {
 
-        // console.log(req.params.id)
-        const {id} = req.params
-        const product = await Product.findByPk(id)
-        if(!product){
-             res.status(404).json({error: 'Producto no encontrado'})
-        } else {
-            res.json({data : product})
-        }
-
-        //Actualizar
-        
-        await product.update(req.body)
-        await product.save()
-        console.log(req.body)
-
-}
-
-
-export const updateAvailability = async (req: Request, res: Response):Promise<void> => {
-
-    // console.log(req.params.id)
-    //conseguir primero el Id
     const {id} = req.params
     const product = await Product.findByPk(id)
-    if(!product){
-         res.status(404).json({error: 'Producto no encontrado'})
-    } 
 
-    //Actualizar
-    product.availability = req.body.availability
+    if(!product){
+        res.status(404).json({error: 'Producto no encontrado'})
+    }
+
+    //actualizar
+    // console.log(req.body)
+    await product.update(req.body)
     await product.save()
-    console.log(product.dataValues)
-    res.json({data : product})
+    res.json({data: product})
+}
+
+export const updateAvailability  = async (req: Request, res: Response):Promise<void> => {
+
+    const {id} = req.params
+    const product = await Product.findByPk(id)
+
+    if(!product){
+        res.status(404).json({error: 'Producto no encontrado'})
+    }
+
+    //actualizar
+    // console.log(req.body)
+   product.availability = !product.dataValues.availability
+    await product.save()
+    res.json({data: product})
+}
+
+export const deletedProduct = async ( req: Request, res: Response):Promise<void> => {
+
+    const {id} = req.params
+    const product = await Product.findByPk(id)
+
+    if(!product){
+        res.status(404).json({error: 'Producto no encontrado'})
+    }
+
+    await product.destroy()
+    
+    res.json({data: 'Producto eliminado'})
+
 
 }
