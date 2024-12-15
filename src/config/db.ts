@@ -6,7 +6,7 @@ dotenv.config()
 
 
 const db = new Sequelize(process.env.DATA_URL!, {
-    models:[__dirname + '/../models/**/*.ts']
+    models:[__dirname + '/../models/**/*']
 });
 
 
